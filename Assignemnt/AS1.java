@@ -10,12 +10,12 @@ public class AS1 {
         int ans = (int) (Math.random() * 100);
         
         while(true) {
-            System.out.println("¼ıÀÚ¸¦ ¸ÂÇô º¸¼¼¿ä(1~100) >> ");
+            System.out.println("ìˆ«ìë¥¼ ë§í˜€ ë³´ì„¸ìš”(1~100) >> ");
             int num = sc.nextInt();
             
-            String hint = num > 100 || num < 0 ? "1~100 »çÀÌÀÇ °ªÀ» ÀÔ·ÂÇÏ¼¼¿ä" :
-            				   num > ans ? "¼ıÀÚ°¡ ³Ê¹« Å®´Ï´Ù." : 
-            					num < ans ? "¼ıÀÚ°¡ ³Ê¹« ÀÛ½À´Ï´Ù." : "Á¤´äÀÔ´Ï´Ù. ·£´ı ¼ıÀÚ´Â " + ans + "ÀÔ´Ï´Ù.";
+            String hint = num > 100 || num < 0 ? "1~100 ì‚¬ì´ì˜ ê°’ì„ ì…ë ¥í•˜ì„¸ìš”" :
+            				   num > ans ? "ìˆ«ìê°€ ë„ˆë¬´ í½ë‹ˆë‹¤." : 
+            					num < ans ? "ìˆ«ìê°€ ë„ˆë¬´ ì‘ìŠµë‹ˆë‹¤." : "ì •ë‹µì…ë‹ˆë‹¤. ëœë¤ ìˆ«ìëŠ” " + ans + "ì…ë‹ˆë‹¤.";
             				   
             System.out.println(hint); 
                  if (num == ans) break;
