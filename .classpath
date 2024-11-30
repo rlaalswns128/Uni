@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="com/whiskypedia/dto/|com/whiskypedia/service/implements/" kind="src" path="back/src/main/java"/>
+	<classpathentry kind="src" path="back/src/main/java/com/whiskypedia/dto"/>
+	<classpathentry kind="src" path="back/src/main/java/com/whiskypedia/service/implements"/>
+	<classpathentry kind="lib" path="back/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="output" path="back/bin/main"/>
+</classpath>

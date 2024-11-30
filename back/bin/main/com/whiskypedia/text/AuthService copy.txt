@@ -1,0 +1,94 @@
+package com.whiskypedia.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.whiskypedia.dto.SignUpDto;
+import com.whiskypedia.entity.UserEntity;
+import com.whiskypedia.repository.UserRepository;
+import com.whiskypedia.security.JwtProvider;
+
+import request.SignInDto;
+import response.ResponseDto;
+import response.SignInResponseDto;
+
+@Service
+public class AuthService {
+	
+	@Autowired UserRepository userRepository;
+	@Autowired JwtProvider tokenProvider;
+	
+// 	public ResponseDto<?> signUp(SignUpDto dto) {
+// 		String user_email = dto.getUserEmail();
+// 		String user_password = dto.getUserPassword();
+// 		String user_passwordConfirm = dto.getUserPasswordConfirm();
+		
+// 		//email 중복 확인!
+// 		try {
+// 			if (userRepository.existsById(user_email))
+// 			return ResponseDto.setFailed("Existed Email!");
+// 		} catch (Exception e) {
+// 			return ResponseDto.setFailed("Database Error!");
+// 		}
+		
+// //		비밀번호가 다르면 failed response 변환!
+// 		if (!user_password.equals(user_passwordConfirm))
+// 			return ResponseDto.setFailed("password does not matched");
+		
+// //		// UserEntity 생성!
+// 		UserEntity userEntity = new UserEntity(dto);
+		
+// 		// UserRepository를 이용해서 데이터베이스에 Entity 저장!
+// 		try {
+// 			userRepository.save(userEntity);
+// 		} catch (Exception e) {
+// 			return ResponseDto.setFailed("Database Error!");
+// 		}
+		
+// 		// 성공시 success response 반응!
+// 		return ResponseDto.setSuccess("Sign Up Success", null);
+// 	}
+
+//	
+	public ResponseDto<SignInResponseDto> signIn(SignInDto dto) {
+		String user_email = dto.getUserEmail();
+		String user_password = dto.getUserPassword();
+		
+//		try {
+//			boolean existed = userRepository.existsByUserEmailAndUserPassword(userEmail, userPassword);
+//			if (!existed) {
+//				System.out.println("존재하지 않는 사용자 혹은 비밀번호 불일치");
+//				return ResponseDto.setFailed("Sign In Info is Unmatched");
+//			}
+//		} catch (Exception error) {
+//			error.printStackTrace();  // Add this line for debugging
+//			return ResponseDto.setFailed("DB Error");
+//		}
+		
+		try {
+	        long count = userRepository.countByUserEmailAndUserPassword(user_email, user_password);
+	        if (count == 0) {
+	            return ResponseDto.setFailed("Sign In Info is Unmatched");
+	        }
+	    } catch (Exception error) {
+	        error.printStackTrace();
+	        return ResponseDto.setFailed("DB Error");
+	    }
+		
+		UserEntity userEntity = null;
+		try {
+			userEntity = userRepository.findById(user_email).get();
+		} catch (Exception error) {
+			return ResponseDto.setFailed("DB Error");
+		}
+		
+		userEntity.setUserPassword("");
+		
+		String token = tokenProvider.create(user_email);
+		int exprTime = 3600000;
+		
+		SignInResponseDto signInResponseDto = new SignInResponseDto(token, exprTime, userEntity);
+		return ResponseDto.setSuccess("Success", signInResponseDto);
+
+	}
+}

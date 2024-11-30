@@ -1,0 +1,24 @@
+package com.whiskypedia.text;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.whiskypedia.entity.UserEntity;
+
+//@Repository 
+//public interface UserRepository extends JpaRepository<UserEntity, String> {
+//	//public boolean existsByUserEmailAndUserPassword(String userEmail, String userPassword);
+//	// In UserRepository.java
+//	@Query("SELECT u FROM User u WHERE u.userEmail = :userEmail AND u.userPassword = :userPassword")
+//	boolean existsByUserEmailAndUserPassword(@Param("userEmail") String userEmail, @Param("userPassword") String userPassword);
+//}
+
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity, String> {
+    boolean existsByUserEmailAndUserPassword(String user_email, String user_password);
+
+    @Query("SELECT COUNT(u) FROM User u WHERE u.userEmail = :user_email AND u.userPassword = :user_password")
+    long countByUserEmailAndUserPassword(@Param("user_email") String user_email, @Param("user_password") String user_password);
+}

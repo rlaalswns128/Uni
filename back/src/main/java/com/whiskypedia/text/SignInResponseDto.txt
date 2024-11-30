@@ -1,0 +1,18 @@
+package response.auth;
+//package com.whiskypedia.dto;
+//
+//import com.whiskypedia.entity.UserEntity_no;
+//
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+//public class SignInResponseDto {
+//	private String token;
+//	private int exprTime;
+//	private UserEntity_no user;
+//}
+
