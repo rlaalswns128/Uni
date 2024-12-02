@@ -2,10 +2,12 @@
 
 건강기능식품 데이터 분석 프로젝트
 
+
 📋 프로젝트 개요
 
 건강기능식품 데이터 분석 프로젝트는 Python을 활용하여 건강기능식품 데이터를 수집, 정제, 분석 및 시각화하는 프로젝트입니다. 
 이 프로젝트는 건강기능식품의 생산 및 수입 데이터를 다루며, 시계열 분석 모델(ARIMA, LSTM)을 통해 미래 추세를 예측합니다.
+
 
 주요 내용
 
@@ -13,6 +15,7 @@
 	•	여러 데이터셋 병합 및 전처리를 통한 심층 분석.
 	•	다양한 차트와 그래프를 사용한 데이터 시각화.
 	•	ARIMA 및 LSTM 모델을 활용한 생산 및 수입량 추세 예측.
+
 
 📊 주요 분석 내용
 
@@ -33,15 +36,18 @@
 		•	ARIMA 모델: 연도별 생산 및 수입량 예측.
 		•	LSTM 모델: 시계열 데이터를 기반으로 생산 및 수입량 예측.
 
+
 🛠️ 코드 분석
 
 주요 코드 구현
+
 
 	1.	데이터 수집
 		•	API를 통해 데이터를 반복적으로 호출하고, 병합하여 최종 CSV 파일로 저장.
 
 response = requests.get(base_url, params=params, verify=False)
 all_data.extend(response.json()["body"]["items"])
+
 
 
 	2.	데이터 전처리
@@ -53,10 +59,12 @@ def remove_patterns(text, patterns):
     return text.strip()
 
 
+
 	3.	시각화
 		•	데이터의 주요 트렌드를 시각화하여 사용자에게 정보를 직관적으로 전달.
 
 plt.pie(category_totals, labels=category_totals.index, autopct='%1.1f%%')
+
 
 
 	4.	미래 예측
@@ -64,6 +72,7 @@ plt.pie(category_totals, labels=category_totals.index, autopct='%1.1f%%')
 
 model = ARIMA(data_series, order=(1, 1, 1))
 forecast = model.fit().forecast(steps=5)
+
 
 📈 결론
 
@@ -75,6 +84,7 @@ forecast = model.fit().forecast(steps=5)
 	•	활용 가능성:
 	•	이 프로젝트는 건강기능식품 시장의 생산 및 수입량을 예측하여 시장 분석 및 의사결정에 기여할 수 있음.
 
+
 💡 개선사항
 
 	1.	데이터 품질 향상
@@ -84,13 +94,15 @@ forecast = model.fit().forecast(steps=5)
 		•	SARIMA, Prophet 등 다양한 모델 도입으로 예측 정확도 비교.
 		•	하이퍼파라미터 튜닝과 추가 평가 지표 도입으로 모델 성능 강화.
 
+
 🧑‍💻 기술 스택
 
 	•	언어: Python
 	•	라이브러리: Pandas, Matplotlib, Seaborn, WordCloud, TensorFlow
 	•	모델: ARIMA, LSTM
 
-📌 앞으로의 방향
+
+📌 앞으로의 확장성
 
 	•	데이터의 품질을 높이기 위한 추가 정제 작업.
 	•	더 많은 외부 데이터를 활용한 모델 성능 향상.
